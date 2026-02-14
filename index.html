@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 La Leyenda de Rouse y Cristian - One Piece 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Poppins:wght@400;600;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .ocean-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 150px;
+            background: rgba(30, 144, 255, 0.3);
+            animation: wave 10s infinite linear;
+        }
+        
+        .wave:nth-child(2) {
+            bottom: 20px;
+            opacity: 0.5;
+            animation: wave 15s infinite linear;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* BANDERA PIRATA ANIMADA */
+        .pirate-flag {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 180px;
+            height: 180px;
+            z-index: 100;
+            animation: flagFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes flagFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        
+        .flag-pole {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 200px;
+            background: linear-gradient(180deg, #8b4513 0%, #654321 100%);
+            border-radius: 3px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+        }
+        
+        .flag-cloth {
+            position: absolute;
+            left: 6px;
+            top: 10px;
+            width: 170px;
+            height: 140px;
+            background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+            border-radius: 10px;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+            animation: flagWave 2s ease-in-out infinite;
+            transform-origin: left center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid #c0392b;
+        }
+        
+        @keyframes flagWave {
+            0%, 100% { 
+                transform: perspective(400px) rotateY(0deg);
+                border-radius: 10px 10px 10px 10px;
+            }
+            50% { 
+                transform: perspective(400px) rotateY(-15deg);
+                border-radius: 10px 30px 30px 10px;
+            }
+        }
+        
+        .flag-symbol {
+            text-align: center;
+            color: white;
+            font-family: 'Bangers', cursive;
+            text-shadow: 
+                3px 3px 0 #c0392b,
+                -3px -3px 0 #c0392b,
+                3px -3px 0 #c0392b,
+                -3px 3px 0 #c0392b,
+                5px 5px 10px rgba(0,0,0,0.5);
+            animation: symbolPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes symbolPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .flag-letter-c {
+            font-size: 4em;
+            display: block;
+            line-height: 0.8;
+            color: #3498db;
+        }
+        
+        .flag-heart {
+            font-size: 3em;
+            display: block;
+            color: #e74c3c;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+        }
+        
+        .flag-letter-r {
+            font-size: 4em;
+            display: block;
+            line-height: 0.8;
+            color: #3498db;
+        }
+        
+        .flag-sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .sparkle {
+            position: absolute;
+            font-size: 20px;
+            animation: sparkle 2s ease-in-out infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+        
+        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 10%; right: 10%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { bottom: 10%; left: 10%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 1.5s; }
+        
+        .game-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .story-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .main-title {
+            font-family: 'Bangers', cursive;
+            font-size: 3.5em;
+            text-align: center;
+            background: linear-gradient(45deg, #e74c3c, #c0392b, #d63031);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 3px 3px 10px rgba(231, 76, 60, 0.3);
+            margin-bottom: 15px;
+            letter-spacing: 4px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.4em;
+            color: #e91e63;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .character-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .character-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .character-card:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        
+        .character-card.cristian {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+        }
+        
+        .character-card.rouse {
+            background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+        }
+        
+        .character-icon {
+            font-size: 5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .character-name {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .character-desc {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .character-power {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        
+        .story-section {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 4px solid #d63031;
+        }
+        
+        .story-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2em;
+            color: #c0392b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .story-text {
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: #2d3436;
+            text-align: justify;
+        }
+        
+        .game-section {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 25px 0;
+        }
+        
+        .level-title {
+            color: white;
+            font-size: 2em;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border: 4px solid #d63031;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .memory-card:hover:not(.flipped):not(.matched) {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .memory-card.flipped,
+        .memory-card.matched {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        }
+        
+        .memory-card.matched {
+            animation: matchPulse 0.6s;
+        }
+        
+        @keyframes matchPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        .memory-card .back {
+            display: block;
+        }
+        
+        .memory-card .front {
+            display: none;
+        }
+        
+        .memory-card.flipped .back,
+        .memory-card.matched .back {
+            display: none;
+        }
+        
+        .memory-card.flipped .front,
+        .memory-card.matched .front {
+            display: block;
+        }
+        
+        .quiz-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+        
+        .question {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .option {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border: 3px solid #6c5ce7;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .option:hover {
+            transform: translateX(10px);
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+        }
+        
+        .option.correct {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            border-color: #00b894;
+            animation: correctPulse 0.5s;
+        }
+        
+        .option.incorrect {
+            background: linear-gradient(135deg, #d63031 0%, #e74c3c 100%);
+            color: white;
+            border-color: #d63031;
+            animation: shake 0.5s;
+        }
+        
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        .score-board {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 25px;
+        }
+        
+        .btn-play {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.4em;
+            font-weight: 900;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+            transition: all 0.3s;
+            display: block;
+            margin: 30px auto;
+        }
+        
+        .btn-play:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(231, 76, 60, 0.7);
+        }
+        
+        .final-message {
+            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            font-size: 1.4em;
+            line-height: 2;
+            display: none;
+            animation: fadeIn 1s;
+        }
+        
+        .final-message.show {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .final-title {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .love-meter {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 25px 0;
+        }
+        
+        .meter-bar {
+            background: rgba(255, 255, 255, 0.5);
+            height: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .meter-fill {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a6f, #c44569);
+            height: 100%;
+            width: 0%;
+            transition: width 2s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.2em;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2em;
+            }
+            
+            .pirate-flag {
+                width: 120px;
+                height: 120px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .flag-cloth {
+                width: 110px;
+                height: 90px;
+            }
+            
+            .flag-letter-c, .flag-letter-r {
+                font-size: 2.5em;
+            }
+            
+            .flag-heart {
+                font-size: 2em;
+            }
+            
+            .character-intro {
+                grid-template-columns: 1fr;
+            }
+            
+            .memory-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .character-icon {
+                font-size: 3.5em;
+            }
+            
+            .game-container {
+                padding: 15px;
+            }
+            
+            .story-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ocean-bg">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    
+    <!-- BANDERA PIRATA ANIMADA -->
+    <div class="pirate-flag">
+        <div class="flag-pole"></div>
+        <div class="flag-cloth">
+            <div class="flag-symbol">
+                <span class="flag-letter-c">C</span>
+                <span class="flag-heart">❤️</span>
+                <span class="flag-letter-r">R</span>
+            </div>
+            <div class="flag-sparkles">
+                <span class="sparkle">✨</span>
+                <span class="sparkle">✨</span>
+                <span class="sparkle">✨</span>
+                <span class="sparkle">✨</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-container">
+        <div class="story-card">
+            <h1 class="main-title">🏴‍☠️ LA LEYENDA DE ROUSE Y CRISTIAN 💖</h1>
+            <p class="subtitle">Una Historia de Amor en el Grand Line</p>
+            
+            <div class="character-intro">
+                <div class="character-card cristian">
+                    <div class="character-icon">⚔️🌊</div>
+                    <div class="character-name">CRISTIAN</div>
+                    <div class="character-desc">
+                        El Capitán de los Corazones Unidos. Un pirata valiente con el sueño de navegar todos los mares junto a su nakama más preciada.
+                    </div>
+                    <div class="character-power">
+                        <strong>💙 Poder Especial:</strong> "Corazón de Acero" - Su amor le da fuerza infinita para proteger a quien más ama.
+                    </div>
+                </div>
+                
+                <div class="character-card rouse">
+                    <div class="character-icon">⭐💫</div>
+                    <div class="character-name">ROUSE</div>
+                    <div class="character-desc">
+                        La Estrella del Grand Line. Una navegante brillante cuya luz guía el camino del amor verdadero a través de las tormentas.
+                    </div>
+                    <div class="character-power">
+                        <strong>💖 Poder Especial:</strong> "Luz Estelar" - Su sonrisa ilumina hasta las noches más oscuras del océano.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-section">
+                <div class="story-title">📖 Capítulo Eterno: El Tesoro Más Grande</div>
+                <div class="story-text">
+                    En las vastas aguas del Grand Line, donde los sueños se hacen realidad, Cristian, el valiente capitán pirata, navegaba en busca del tesoro más legendario. Pero el destino tenía planes diferentes... Un día, en una isla misteriosa iluminada por estrellas, conoció a Rouse, cuya belleza y espíritu aventurero brillaban más que cualquier tesoro dorado.
+                    <br><br>
+                    Juntos formaron la tripulación más fuerte que los mares hayan visto: Los Corazones Unidos. Cristian juró proteger a Rouse con la fuerza del océano, mientras ella prometió guiarlo con la luz de las estrellas hacia horizontes infinitos.
+                    <br><br>
+                    Su amor es como el One Piece: invaluable, eterno y digno de ser buscado por toda la vida. Cada día juntos es una nueva aventura, cada sonrisa un tesoro conquistado, y cada abrazo una victoria contra las tormentas del destino.
+                    <br><br>
+                    <strong>💕 "En el mar del amor, Rouse es mi North Star, y yo soy su protector eterno. Juntos, somos invencibles." - Cristian</strong>
+                </div>
+            </div>
+            
+            <button class="btn-play" onclick="startGame()">🎮 ¡JUGAR AHORA! 🎮</button>
+        </div>
+        
+        <div id="gameArea" class="hidden">
+            <div class="story-card">
+                <div class="game-section">
+                    <div class="level-title"> NIVEL 1: MEMORIAS DE AMOR</div>
+                    <div class="score-board">
+                         Parejas encontradas: <span id="pairsFound">0</span>/6
+                    </div>
+                    <div class="memory-grid" id="memoryGrid"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="quizArea" class="hidden">
+            <div class="story-card">
+                <div class="game-section">
+                    <div class="level-title">💭 NIVEL 2: PREGUNTAS DEL CORAZÓN</div>
+                    <div class="score-board">
+                         Pregunta <span id="currentQ">1</span> de 5
+                    </div>
+                    <div id="quizContainer"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="finalArea" class="hidden">
+            <div class="story-card">
+                <div class="final-message show">
+                    <div class="final-title"> ¡AMOR ETERNO ALCANZADO! </div>
+                    <p>¡Felicidades, Rouse y Cristian han completado su aventura del amor!</p>
+                    
+                    <div class="love-meter">
+                        <div style="font-size: 1.8em; font-weight: 900; margin-bottom: 15px;">
+                            MEDIDOR DE NUESTRO AMOR 
+                        </div>
+                        <div class="meter-bar">
+                            <div class="meter-fill" id="loveMeter">100% ∞</div>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 1.6em; margin: 25px 0;">
+                         <strong>R</strong> <br>
+                        +<br>
+                         <strong>C</strong> <br>
+                        =<br>
+                        <strong>AMOR INFINITO</strong> 
+                    </p>
+                    
+                    <p style="margin-top: 30px;">
+                        Como Luffy nunca renunció a su sueño, Cristian nunca dejará de amar a Rouse. Como Nami encontró su familia en los Sombrero de Paja, Rouse encontró su hogar en el corazón de Cristian.
+                    </p>
+                    
+                    <p style="font-style: italic; font-size: 1.3em; margin-top: 25px; border-top: 2px solid white; padding-top: 20px;">
+                        "¡Navegaremos juntos hacia el horizonte infinito del amor!"<br>
+                        - Capitán Cristian & Navegante Rouse 🏴‍☠️💕
+                    </p>
+                    
+                    <button class="btn-play" onclick="restartGame()">🔄 JUGAR DE NUEVO 🔄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Juego de Memoria
+        const memoryIcons = ['💖', '⚔️', '⭐', '🌊', '🏴‍☠️', '💕'];
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        
+        function initMemoryGame() {
+            const grid = document.getElementById('memoryGrid');
+            grid.innerHTML = '';
+            memoryCards = [...memoryIcons, ...memoryIcons].sort(() => Math.random() - 0.5);
+            flippedCards = [];
+            matchedPairs = 0;
+            document.getElementById('pairsFound').textContent = '0';
+            
+            memoryCards.forEach((icon, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.innerHTML = `
+                    <span class="back">❓</span>
+                    <span class="front">${icon}</span>
+                `;
+                card.onclick = () => flipCard(card, icon, index);
+                grid.appendChild(card);
+            });
+        }
+        
+        function flipCard(card, icon, index) {
+            if (flippedCards.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
+                return;
+            }
+            
+            card.classList.add('flipped');
+            flippedCards.push({ card, icon, index });
+            
+            if (flippedCards.length === 2) {
+                setTimeout(checkMatch, 800);
+            }
+        }
+        
+        function checkMatch() {
+            const [first, second] = flippedCards;
+            
+            if (first.icon === second.icon && first.index !== second.index) {
+                first.card.classList.add('matched');
+                second.card.classList.add('matched');
+                matchedPairs++;
+                document.getElementById('pairsFound').textContent = matchedPairs;
+                
+                if (matchedPairs === 6) {
+                    setTimeout(startQuiz, 1500);
+                }
+            } else {
+                first.card.classList.remove('flipped');
+                second.card.classList.remove('flipped');
+            }
+            
+            flippedCards = [];
+        }
+        
+        // Quiz del Amor
+        const quizQuestions = [
+            {
+                q: '¿Qué representa Rouse en la vida de Cristian?',
+                options: ['Su tesoro más valioso', 'Una compañera más', 'Una aventura temporal', 'Un sueño lejano'],
+                correct: 0
+            },
+            {
+                q: '¿Cuál es el nombre de su tripulación?',
+                options: ['Los Piratas del Amor', 'Corazones Unidos', 'Los Eternos', 'Estrellas del Mar'],
+                correct: 1
+            },
+            {
+                q: '¿Qué poder especial tiene Cristian?',
+                options: ['Velocidad marina', 'Corazón de Acero', 'Fuerza titánica', 'Control del clima'],
+                correct: 1
+            },
+            {
+                q: '¿Qué guía el camino de la tripulación?',
+                options: ['Un mapa antiguo', 'La luz de las estrellas de Rouse', 'Una brújula mágica', 'El instinto'],
+                correct: 1
+            },
+            {
+                q: '¿Qué promesa hizo Cristian a Rouse?',
+                options: ['Encontrar el One Piece', 'Protegerla con la fuerza del océano', 'Ser el Rey de los Piratas', 'Navegar solo'],
+                correct: 1
+            }
+        ];
+        
+        let currentQuestion = 0;
+        
+        function startQuiz() {
+            document.getElementById('gameArea').classList.add('hidden');
+            document.getElementById('quizArea').classList.remove('hidden');
+            currentQuestion = 0;
+            showQuestion();
+        }
+        
+        function showQuestion() {
+            if (currentQuestion >= quizQuestions.length) {
+                showFinal();
+                return;
+            }
+            
+            const q = quizQuestions[currentQuestion];
+            const container = document.getElementById('quizContainer');
+            document.getElementById('currentQ').textContent = currentQuestion + 1;
+            
+            container.innerHTML = `
+                <div class="quiz-container">
+                    <div class="question">${q.q}</div>
+                    <div class="options" id="optionsContainer"></div>
+                </div>
+            `;
+            
+            const optionsDiv = document.getElementById('optionsContainer');
+            q.options.forEach((option, index) => {
+                const btn = document.createElement('div');
+                btn.className = 'option';
+                btn.textContent = option;
+                btn.onclick = () => selectAnswer(index, q.correct, btn);
+                optionsDiv.appendChild(btn);
+            });
+        }
+        
+        function selectAnswer(selected, correct, btn) {
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (selected === correct) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                allOptions[correct].classList.add('correct');
+            }
+            
+            currentQuestion++;
+            setTimeout(showQuestion, 2500);
+        }
+        
+        function showFinal() {
+            document.getElementById('quizArea').classList.add('hidden');
+            document.getElementById('finalArea').classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('loveMeter').style.width = '100%';
+            }, 500);
+        }
+        
+        function startGame() {
+            document.querySelector('.story-card').classList.add('hidden');
+            document.getElementById('gameArea').classList.remove('hidden');
+            initMemoryGame();
+        }
+        
+        function restartGame() {
+            document.getElementById('finalArea').classList.add('hidden');
+            document.querySelector('.story-card').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
